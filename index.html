@@ -1,0 +1,685 @@
+
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-black text-gray-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sport Link - Reserva de Canchas 1 a 4</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            gold: {
+              300: '#fde047',
+              400: '#facc15',
+              500: '#eab308',
+              600: '#ca8a04',
+              700: '#a16207',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #FFF5C0 0%, #EAB308 50%, #A16207 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gold-bg-gradient {
+      background: linear-gradient(135deg, #FACC15 0%, #EAB308 50%, #CA8A04 100%);
+    }
+    .gold-border-glow {
+      box-shadow: 0 0 15px rgba(234, 179, 8, 0.25);
+    }
+    .red-border-glow {
+      box-shadow: 0 0 12px rgba(239, 68, 68, 0.3);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-black text-white font-sans flex flex-col justify-between selection:bg-yellow-500 selection:text-black">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-md border-b border-yellow-500/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl gold-bg-gradient flex items-center justify-center text-black font-extrabold text-2xl shadow-lg shadow-yellow-500/20">
+          <i class="fa-solid fa-futbol"></i>
+        </div>
+        <div>
+          <span class="text-xl sm:text-2xl font-black tracking-wider gold-gradient-text block leading-none">SPORT LINK</span>
+          <span class="text-[10px] sm:text-xs text-yellow-500/70 tracking-widest uppercase font-semibold">Alquiler de Canchas 1 a 4</span>
+        </div>
+      </div>
+
+      <!-- Top Right Golden WhatsApp Action -->
+      <button onclick="sendDirectWhatsApp()" type="button"
+              class="gold-bg-gradient hover:opacity-95 text-black font-black py-2.5 px-4 sm:px-5 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg shadow-yellow-500/20 text-xs sm:text-sm flex items-center gap-2">
+        <i class="fa-brands fa-whatsapp text-lg"></i>
+        <span>RESERVAR AHORA</span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10 flex-1 w-full">
+    
+    <!-- Hero Banner -->
+    <div class="text-center mb-8 max-w-3xl mx-auto">
+      <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 mb-3">
+        <i class="fa-solid fa-clock"></i> Horario Continuo: 8:00 AM a 10:00 PM
+      </span>
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-3">
+        Reserva tu Cancha en <span class="gold-gradient-text">Sport Link</span>
+      </h1>
+      <p class="text-gray-400 text-xs sm:text-sm">
+        Ingresa tus datos para habilitar el selector de horarios. Canchas de fútbol 8, fútbol 6, futsal y parquet disponibles con confirmación inmediata y pago por QR.
+      </p>
+    </div>
+
+    <!-- Layout Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Left Column (8 cols): Step Forms -->
+      <div class="lg:col-span-8 space-y-6">
+        
+        <!-- STEP 1: Customer Information -->
+        <div class="bg-zinc-900/90 border border-yellow-500/30 rounded-2xl p-5 sm:p-6 shadow-xl">
+          <h2 class="text-lg font-bold text-yellow-400 mb-2 flex items-center justify-between">
+            <span class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-full bg-yellow-500/20 text-yellow-400 flex items-center justify-center text-sm font-black">1</span>
+              Datos Personales
+            </span>
+            <span id="step1-badge" class="text-xs px-2.5 py-0.5 rounded-full bg-red-500/20 text-red-400 font-semibold border border-red-500/30">Requerido</span>
+          </h2>
+          <p class="text-xs text-gray-400 mb-4">Por favor llena estos datos primero para habilitar los horarios de reserva.</p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-gray-300 mb-1">Nombre Completo *</label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500"><i class="fa-solid fa-user"></i></span>
+                <input type="text" id="customer-name" placeholder="Ej. Carlos Mendoza" oninput="validateStep1()"
+                       class="w-full bg-zinc-800 border border-zinc-700 rounded-lg py-2.5 pl-9 pr-3 text-sm text-white focus:outline-none focus:border-yellow-500 transition-colors">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-gray-300 mb-1">Número de Teléfono / WhatsApp *</label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500"><i class="fa-solid fa-phone"></i></span>
+                <input type="tel" id="customer-phone" placeholder="Ej. 63019592" oninput="validateStep1()"
+                       class="w-full bg-zinc-800 border border-zinc-700 rounded-lg py-2.5 pl-9 pr-3 text-sm text-white focus:outline-none focus:border-yellow-500 transition-colors">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2: Select Court (1 to 4) -->
+        <div class="bg-zinc-900/90 border border-yellow-500/30 rounded-2xl p-5 sm:p-6 shadow-xl">
+          <h2 class="text-lg font-bold text-yellow-400 mb-4 flex items-center gap-2">
+            <span class="w-7 h-7 rounded-full bg-yellow-500/20 text-yellow-400 flex items-center justify-center text-sm font-black">2</span>
+            Selecciona la Cancha (1 a 4)
+          </h2>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="court-selector">
+            
+            <!-- Cancha 1 (Fútbol 8 - La más grande) -->
+            <button type="button" onclick="selectCourt('Cancha 1', 120)" id="court-btn-1" 
+                    class="court-card text-left p-4 rounded-xl border border-yellow-500/50 bg-zinc-800/80 hover:border-yellow-400 transition-all focus:outline-none relative overflow-hidden group gold-border-glow">
+              <div class="absolute top-2 right-2 text-yellow-400">
+                <i class="fa-solid fa-circle-check text-xl check-icon"></i>
+              </div>
+              <div class="text-yellow-400 mb-1 text-xl"><i class="fa-solid fa-futbol"></i></div>
+              <div class="flex items-center gap-2">
+                <h3 class="font-bold text-white text-base group-hover:text-yellow-400">Cancha 1</h3>
+                <span class="px-2 py-0.5 rounded text-[10px] font-black bg-yellow-500/20 text-yellow-300 border border-yellow-500/40 uppercase">Más Grande</span>
+              </div>
+              <p class="text-xs text-gray-300 font-semibold mt-1">Fútbol 8 • Césped Sintético Pro</p>
+              <div class="mt-3 text-xs font-bold text-yellow-400 bg-yellow-500/10 px-2.5 py-1 rounded w-max">Bs. 120 / Hora</div>
+            </button>
+
+            <!-- Cancha 2 -->
+            <button type="button" onclick="selectCourt('Cancha 2', 90)" id="court-btn-2" 
+                    class="court-card text-left p-4 rounded-xl border border-zinc-700 bg-zinc-800/40 hover:border-yellow-400/50 transition-all focus:outline-none relative overflow-hidden group">
+              <div class="absolute top-2 right-2 text-gray-600">
+                <i class="fa-solid fa-circle-check text-xl check-icon hidden"></i>
+              </div>
+              <div class="text-gray-400 mb-1 text-xl group-hover:text-yellow-400"><i class="fa-solid fa-grass"></i></div>
+              <h3 class="font-bold text-white text-base group-hover:text-yellow-400">Cancha 2</h3>
+              <p class="text-xs text-gray-400 mt-1">Fútbol 6 • Césped Sintético</p>
+              <div class="mt-3 text-xs font-semibold text-gray-300 bg-zinc-700/50 px-2.5 py-1 rounded w-max">Bs. 90 / Hora</div>
+            </button>
+
+            <!-- Cancha 3 -->
+            <button type="button" onclick="selectCourt('Cancha 3', 80)" id="court-btn-3" 
+                    class="court-card text-left p-4 rounded-xl border border-zinc-700 bg-zinc-800/40 hover:border-yellow-400/50 transition-all focus:outline-none relative overflow-hidden group">
+              <div class="absolute top-2 right-2 text-gray-600">
+                <i class="fa-solid fa-circle-check text-xl check-icon hidden"></i>
+              </div>
+              <div class="text-gray-400 mb-1 text-xl group-hover:text-yellow-400"><i class="fa-solid fa-basketball"></i></div>
+              <h3 class="font-bold text-white text-base group-hover:text-yellow-400">Cancha 3</h3>
+              <p class="text-xs text-gray-400 mt-1">Futsal</p>
+              <div class="mt-3 text-xs font-semibold text-gray-300 bg-zinc-700/50 px-2.5 py-1 rounded w-max">Bs. 80 / Hora</div>
+            </button>
+
+            <!-- Cancha 4 -->
+            <button type="button" onclick="selectCourt('Cancha 4', 70)" id="court-btn-4" 
+                    class="court-card text-left p-4 rounded-xl border border-zinc-700 bg-zinc-800/40 hover:border-yellow-400/50 transition-all focus:outline-none relative overflow-hidden group">
+              <div class="absolute top-2 right-2 text-gray-600">
+                <i class="fa-solid fa-circle-check text-xl check-icon hidden"></i>
+              </div>
+              <div class="text-gray-400 mb-1 text-xl group-hover:text-yellow-400"><i class="fa-solid fa-volleyball"></i></div>
+              <h3 class="font-bold text-white text-base group-hover:text-yellow-400">Cancha 4</h3>
+              <p class="text-xs text-gray-400 mt-1">Futsal / Vóley </p>
+              <div class="mt-3 text-xs font-semibold text-gray-300 bg-zinc-700/50 px-2.5 py-1 rounded w-max">Bs. 70 / Hora</div>
+            </button>
+
+          </div>
+        </div>
+
+        <!-- STEP 3: Date & Time Slots (Locked until Step 1 filled) -->
+        <div class="bg-zinc-900/90 border border-yellow-500/30 rounded-2xl p-5 sm:p-6 shadow-xl relative" id="schedule-section">
+          
+          <!-- Locked Mask overlay when Step 1 incomplete -->
+          <div id="schedule-locked-overlay" class="absolute inset-0 bg-black/80 backdrop-blur-sm z-20 rounded-2xl flex flex-col items-center justify-center p-6 text-center transition-all">
+            <div class="w-14 h-14 rounded-full bg-yellow-500/10 border border-yellow-500/40 text-yellow-400 flex items-center justify-center text-2xl mb-3">
+              <i class="fa-solid fa-lock"></i>
+            </div>
+            <h3 class="text-base font-bold text-white mb-1">Completa tus datos arriba</h3>
+            <p class="text-xs text-gray-400 max-w-sm">
+              Llena tu <strong class="text-yellow-400">Nombre</strong> y <strong class="text-yellow-400">Teléfono</strong> en el paso 1 para desbloquear y consultar los horarios disponibles de 8 AM a 10 PM.
+            </p>
+          </div>
+
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+            <h2 class="text-lg font-bold text-yellow-400 flex items-center gap-2">
+              <span class="w-7 h-7 rounded-full bg-yellow-500/20 text-yellow-400 flex items-center justify-center text-sm font-black">3</span>
+              Fecha y Horarios (8:00 AM a 10:00 PM)
+            </h2>
+
+            <!-- Date Selector -->
+            <div class="flex items-center gap-2 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-1.5">
+              <i class="fa-regular fa-calendar-days text-yellow-400"></i>
+              <input type="date" id="booking-date" onchange="onDateOrCourtChange()" 
+                     class="bg-transparent text-white text-xs sm:text-sm focus:outline-none font-medium cursor-pointer">
+            </div>
+          </div>
+
+          <!-- Schedule Legend -->
+          <div class="flex flex-wrap items-center gap-4 text-xs mb-5 p-3 bg-zinc-950/80 rounded-xl border border-zinc-800">
+            <span class="text-gray-400 font-semibold">Leyenda de estados:</span>
+            <div class="flex items-center gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500"></span>
+              <span class="text-emerald-400 font-medium">Disponible</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-red-600 shadow-sm shadow-red-600"></span>
+              <span class="text-red-400 font-bold">Ocupado (Rojo)</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-yellow-400 shadow-sm shadow-yellow-400"></span>
+              <span class="text-yellow-400 font-medium">Seleccionado</span>
+            </div>
+          </div>
+
+          <!-- Time Slot Grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5" id="time-slots-container">
+            <!-- Dynamically populated via JS -->
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Right Column (4 cols): Summary & Confirmation Actions -->
+      <div class="lg:col-span-4 sticky top-28 space-y-6">
+        
+        <div class="bg-zinc-900/90 border-2 border-yellow-500/40 rounded-2xl p-6 shadow-2xl gold-border-glow relative overflow-hidden">
+          
+          <div class="absolute top-0 left-0 right-0 h-1.5 gold-bg-gradient"></div>
+
+          <h3 class="text-lg font-black text-white mb-4 flex items-center justify-between border-b border-zinc-800 pb-3">
+            <span>Resumen de Reserva</span>
+            <i class="fa-solid fa-receipt text-yellow-400"></i>
+          </h3>
+
+          <div class="space-y-3.5 text-xs sm:text-sm">
+            <div>
+              <span class="text-[11px] text-gray-400 uppercase tracking-wider font-semibold block">Cancha Seleccionada</span>
+              <p class="font-bold text-yellow-400 text-base" id="summary-court">Cancha 1 (Fútbol 8)</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 border-t border-zinc-800/80 pt-3">
+              <div>
+                <span class="text-[11px] text-gray-400 uppercase tracking-wider font-semibold block">Fecha</span>
+                <p class="font-semibold text-white" id="summary-date">Hoy</p>
+              </div>
+              <div>
+                <span class="text-[11px] text-gray-400 uppercase tracking-wider font-semibold block">Horario</span>
+                <p class="font-bold text-red-400" id="summary-time">Sin seleccionar</p>
+              </div>
+            </div>
+
+            <div class="border-t border-zinc-800/80 pt-3">
+              <span class="text-[11px] text-gray-400 uppercase tracking-wider font-semibold block">Cliente</span>
+              <p class="font-medium text-white italic" id="summary-name">Por ingresar datos...</p>
+            </div>
+
+            <!-- Pricing -->
+            <div class="border-t border-zinc-800/80 pt-3 space-y-1">
+              <div class="flex justify-between text-xs text-gray-400">
+                <span>Tarifa / hora:</span>
+                <span id="summary-price-rate">Bs. 120</span>
+              </div>
+              <div class="flex justify-between font-bold text-sm text-white pt-2 border-t border-zinc-800">
+                <span>Total Estimado:</span>
+                <span class="text-yellow-400 text-lg font-black" id="summary-total">Bs. 120</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Alert banner -->
+          <div id="validation-msg" class="hidden mt-4 p-3 rounded-lg bg-red-950/60 border border-red-500/50 text-red-200 text-xs flex items-center gap-2">
+            <i class="fa-solid fa-circle-exclamation text-red-400 text-base flex-shrink-0"></i>
+            <span id="validation-text">Selecciona un horario para continuar.</span>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="mt-6 space-y-3">
+            
+            <!-- Pay QR Modal Trigger -->
+            <button onclick="openQRModal()" type="button"
+                    class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-3 px-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 text-xs sm:text-sm">
+              <i class="fa-solid fa-qrcode text-lg"></i>
+              <span>PAGAR Y RESERVAR CON QR</span>
+            </button>
+
+            <!-- Send WhatsApp Confirmation Button -->
+            <button onclick="sendDirectWhatsApp()" type="button"
+                    class="w-full gold-bg-gradient hover:opacity-95 text-black font-extrabold py-3 px-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 text-xs sm:text-sm">
+              <i class="fa-brands fa-whatsapp text-lg"></i>
+              <span>CONFIRMAR POR WHATSAPP</span>
+            </button>
+            <p class="text-center text-[11px] text-gray-400">
+              Número oficial WhatsApp: <strong class="text-gray-300">63019592</strong>
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Modal Payment QR -->
+  <div id="qr-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-zinc-900 border-2 border-yellow-500/50 rounded-2xl max-w-md w-full p-6 text-center relative shadow-2xl gold-border-glow">
+      
+      <button onclick="closeQRModal()" class="absolute top-3 right-3 text-gray-400 hover:text-white text-xl">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="w-12 h-12 rounded-full gold-bg-gradient flex items-center justify-center text-black font-extrabold text-xl mx-auto mb-3">
+        <i class="fa-solid fa-qrcode"></i>
+      </div>
+
+      <h3 class="text-xl font-black text-white">Escanear QR para Pago</h3>
+      <p class="text-xs text-gray-400 mt-1">Sport Link - Reserva de Canchas</p>
+
+      <!-- QR Code Image -->
+      <div class="my-5 bg-white p-4 rounded-xl inline-block shadow-inner">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=SPORTLINK_CANCHAS_63019592" 
+             alt="Código QR de Pago" class="w-48 h-48 mx-auto border border-gray-300">
+      </div>
+
+      <div class="text-xs text-gray-300 bg-zinc-800 p-3 rounded-lg space-y-1 mb-5 text-left border border-zinc-700">
+        <p><strong>Titular:</strong> Sport Link SRL</p>
+        <p><strong>Cancha:</strong> <span id="modal-court-name" class="text-yellow-400">Cancha 1</span></p>
+        <p><strong>Fecha/Horario:</strong> <span id="modal-time-slot" class="text-yellow-400">-</span></p>
+        <p><strong>Monto:</strong> <span id="modal-amount" class="text-emerald-400 font-bold">Bs. 0</span></p>
+      </div>
+
+      <button onclick="confirmBookingPayment()" type="button"
+              class="w-full bg-green-600 hover:bg-green-500 text-white font-extrabold py-3 rounded-xl transition-all flex items-center justify-center gap-2 text-sm shadow-lg shadow-green-600/30">
+        <i class="fa-solid fa-check-circle"></i>
+        <span>CONFIRMAR PAGO REALIZADO</span>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-zinc-800 bg-zinc-950 py-6 mt-12">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-gray-500">
+      <p>© 2026 <span class="text-yellow-500 font-semibold">Sport Link</span>. Alquiler de Canchas de la 1 a la 4. Contacto WhatsApp: <span class="text-gray-300">63019592</span>.</p>
+    </div>
+  </footer>
+
+  <!-- JS Logic -->
+  <script>
+    // State
+    let selectedCourt = 'Cancha 1';
+    let selectedCourtPrice = 120;
+    let selectedSlotId = null;
+
+    // Full 8:00 AM to 10:00 PM (8:00 to 22:00) 1-hour slots
+    const ALL_TIME_SLOTS = [
+      { id: '08-09', label: '8:00 AM - 9:00 AM', start: '08:00' },
+      { id: '09-10', label: '9:00 AM - 10:00 AM', start: '09:00' },
+      { id: '10-11', label: '10:00 AM - 11:00 AM', start: '10:00' },
+      { id: '11-12', label: '11:00 AM - 12:00 PM', start: '11:00' },
+      { id: '12-13', label: '12:00 PM - 1:00 PM', start: '12:00' },
+      { id: '13-14', label: '1:00 PM - 2:00 PM', start: '13:00' },
+      { id: '14-15', label: '2:00 PM - 3:00 PM', start: '14:00' },
+      { id: '15-16', label: '3:00 PM - 4:00 PM', start: '15:00' },
+      { id: '16-17', label: '4:00 PM - 5:00 PM', start: '16:00' },
+      { id: '17-18', label: '5:00 PM - 6:00 PM', start: '17:00' },
+      { id: '18-19', label: '6:00 PM - 7:00 PM', start: '18:00' },
+      { id: '19-20', label: '7:00 PM - 8:00 PM', start: '19:00' },
+      { id: '20-21', label: '8:00 PM - 9:00 PM', start: '20:00' },
+      { id: '21-22', label: '9:00 PM - 10:00 PM', start: '21:00' }
+    ];
+
+    window.onload = function() {
+      // Set current default date
+      const dateInput = document.getElementById('booking-date');
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.value = today;
+      dateInput.min = today;
+
+      // Seed initial mock reservations in localStorage if empty
+      seedInitialReservations(today);
+
+      // Initialize Step 1 check & UI state
+      validateStep1();
+      updateSummary();
+    };
+
+    // Seeds initial mock booked slots for demonstration
+    function seedInitialReservations(todayStr) {
+      const storageKey = 'sportlink_reservations';
+      if (!localStorage.getItem(storageKey)) {
+        const initialMap = {
+          [`${todayStr}_Cancha 1`]: ['20-21'], // 8-9 PM occupied on Cancha 1 today
+          [`${todayStr}_Cancha 2`]: ['10-11', '19-20'],
+          [`${todayStr}_Cancha 3`]: ['16-17']
+        };
+        localStorage.setItem(storageKey, JSON.stringify(initialMap));
+      }
+    }
+
+    // Get current reservations from localStorage
+    function getStoredReservations(dateStr, courtName) {
+      const storageKey = 'sportlink_reservations';
+      try {
+        const store = JSON.parse(localStorage.getItem(storageKey) || '{}');
+        return store[`${dateStr}_${courtName}`] || [];
+      } catch(e) {
+        return [];
+      }
+    }
+
+    // Save a new reservation persistently
+    function saveReservation(dateStr, courtName, slotId) {
+      const storageKey = 'sportlink_reservations';
+      try {
+        const store = JSON.parse(localStorage.getItem(storageKey) || '{}');
+        const key = `${dateStr}_${courtName}`;
+        if (!store[key]) store[key] = [];
+        if (!store[key].includes(slotId)) store[key].push(slotId);
+        localStorage.setItem(storageKey, JSON.stringify(store));
+      } catch(e) {
+        console.error('Error saving reservation:', e);
+      }
+    }
+
+    // Check if Step 1 (Personal details) is filled
+    function validateStep1() {
+      const name = document.getElementById('customer-name').value.trim();
+      const phone = document.getElementById('customer-phone').value.trim();
+      const isComplete = name.length > 2 && phone.length >= 6;
+
+      const overlay = document.getElementById('schedule-locked-overlay');
+      const step1Badge = document.getElementById('step1-badge');
+
+      if (isComplete) {
+        overlay.classList.add('hidden');
+        step1Badge.textContent = 'Completado';
+        step1Badge.className = 'text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-semibold border border-emerald-500/30';
+      } else {
+        overlay.classList.remove('hidden');
+        step1Badge.textContent = 'Requerido';
+        step1Badge.className = 'text-xs px-2.5 py-0.5 rounded-full bg-red-500/20 text-red-400 font-semibold border border-red-500/30';
+      }
+
+      updateSummary();
+    }
+
+    // Switch Court
+    function selectCourt(courtName, price) {
+      selectedCourt = courtName;
+      selectedCourtPrice = price;
+      selectedSlotId = null;
+
+      // Update Card Visuals
+      for (let i = 1; i <= 4; i++) {
+        const btn = document.getElementById(`court-btn-${i}`);
+        if (!btn) continue;
+
+        const isThisCourt = (i === 1 && courtName === 'Cancha 1') ||
+                            (i === 2 && courtName === 'Cancha 2') ||
+                            (i === 3 && courtName === 'Cancha 3') ||
+                            (i === 4 && courtName === 'Cancha 4');
+
+        if (isThisCourt) {
+          btn.className = 'court-card text-left p-4 rounded-xl border border-yellow-500/50 bg-zinc-800/80 hover:border-yellow-400 transition-all focus:outline-none relative overflow-hidden group gold-border-glow';
+          btn.querySelector('.check-icon')?.classList.remove('hidden');
+        } else {
+          btn.className = 'court-card text-left p-4 rounded-xl border border-zinc-700 bg-zinc-800/40 hover:border-yellow-400/50 transition-all focus:outline-none relative overflow-hidden group';
+          btn.querySelector('.check-icon')?.classList.add('hidden');
+        }
+      }
+
+      renderTimeSlots();
+      updateSummary();
+    }
+
+    // Triggered when date or court is changed
+    function onDateOrCourtChange() {
+      selectedSlotId = null;
+      renderTimeSlots();
+      updateSummary();
+    }
+
+    // Render 8:00 AM to 10:00 PM Slots
+    function renderTimeSlots() {
+      const container = document.getElementById('time-slots-container');
+      const dateVal = document.getElementById('booking-date').value;
+      container.innerHTML = '';
+
+      // Get occupied list for court and date
+      const occupiedSlots = getStoredReservations(dateVal, selectedCourt);
+
+      ALL_TIME_SLOTS.forEach(slot => {
+        const isOccupied = occupiedSlots.includes(slot.id);
+        const isSelected = selectedSlotId === slot.id;
+
+        const slotBtn = document.createElement('button');
+        slotBtn.type = 'button';
+
+        if (isOccupied) {
+          // --- OCCUPIED (RED / DISABELD) ---
+          slotBtn.className = `p-3 rounded-xl border-2 border-red-600/80 bg-red-950/40 text-left cursor-not-allowed opacity-90 red-border-glow relative overflow-hidden`;
+          slotBtn.disabled = true;
+
+          slotBtn.innerHTML = `
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-bold text-red-200">${slot.start}</span>
+              <span class="px-1.5 py-0.5 rounded text-[9px] font-black uppercase bg-red-600 text-white">Ocupado</span>
+            </div>
+            <div class="text-[11px] text-red-300 font-semibold truncate">${slot.label}</div>
+          `;
+        } else {
+          // --- AVAILABLE ---
+          if (isSelected) {
+            slotBtn.className = `p-3 rounded-xl border-2 border-yellow-400 bg-yellow-500/20 text-left gold-border-glow transition-all`;
+          } else {
+            slotBtn.className = `p-3 rounded-xl border border-zinc-700 bg-zinc-800/70 hover:border-emerald-500 hover:bg-zinc-800 text-left transition-all group`;
+          }
+
+          slotBtn.onclick = () => {
+            selectedSlotId = slot.id;
+            hideValidationMsg();
+            renderTimeSlots();
+            updateSummary();
+          };
+
+          slotBtn.innerHTML = `
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-bold ${isSelected ? 'text-yellow-400' : 'text-white group-hover:text-emerald-400'}">${slot.start}</span>
+              <span class="px-1.5 py-0.5 rounded text-[9px] font-bold uppercase ${isSelected ? 'bg-yellow-400 text-black' : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'}">
+                ${isSelected ? 'Elegido' : 'Libre'}
+              </span>
+            </div>
+            <div class="text-[11px] ${isSelected ? 'text-yellow-200' : 'text-gray-300'} font-medium truncate">${slot.label}</div>
+          `;
+        }
+
+        container.appendChild(slotBtn);
+      });
+    }
+
+    // Update Summary Sidebar
+    function updateSummary() {
+      const dateVal = document.getElementById('booking-date').value;
+      const nameVal = document.getElementById('customer-name').value.trim();
+
+      document.getElementById('summary-court').textContent = selectedCourt;
+      
+      // Date
+      if (dateVal) {
+        const parts = dateVal.split('-');
+        document.getElementById('summary-date').textContent = `${parts[2]}/${parts[1]}/${parts[0]}`;
+      }
+
+      // Slot
+      const slotObj = ALL_TIME_SLOTS.find(s => s.id === selectedSlotId);
+      if (slotObj) {
+        document.getElementById('summary-time').textContent = slotObj.label;
+        document.getElementById('summary-time').className = 'font-bold text-yellow-400';
+      } else {
+        document.getElementById('summary-time').textContent = 'Sin seleccionar';
+        document.getElementById('summary-time').className = 'font-bold text-red-400';
+      }
+
+      // Name
+      document.getElementById('summary-name').textContent = nameVal ? nameVal : 'Por ingresar datos...';
+
+      // Price
+      document.getElementById('summary-price-rate').textContent = `Bs. ${selectedCourtPrice}`;
+      document.getElementById('summary-total').textContent = `Bs. ${selectedCourtPrice}`;
+    }
+
+    function showValidationMsg(msg) {
+      const banner = document.getElementById('validation-msg');
+      document.getElementById('validation-text').textContent = msg;
+      banner.classList.remove('hidden');
+    }
+
+    function hideValidationMsg() {
+      document.getElementById('validation-msg').classList.add('hidden');
+    }
+
+    // Open QR Code Modal
+    function openQRModal() {
+      const name = document.getElementById('customer-name').value.trim();
+      const phone = document.getElementById('customer-phone').value.trim();
+
+      if (!name || phone.length < 6) {
+        showValidationMsg('Por favor completa tu Nombre y Teléfono en el paso 1.');
+        return;
+      }
+
+      if (!selectedSlotId) {
+        showValidationMsg('Por favor selecciona un horario disponible (entre 8:00 AM y 10:00 PM).');
+        return;
+      }
+
+      hideValidationMsg();
+
+      const slotObj = ALL_TIME_SLOTS.find(s => s.id === selectedSlotId);
+      const dateVal = document.getElementById('booking-date').value;
+
+      document.getElementById('modal-court-name').textContent = selectedCourt;
+      document.getElementById('modal-time-slot').textContent = `${dateVal} | ${slotObj.label}`;
+      document.getElementById('modal-amount').textContent = `Bs. ${selectedCourtPrice}`;
+
+      document.getElementById('qr-modal').classList.remove('hidden');
+    }
+
+    function closeQRModal() {
+      document.getElementById('qr-modal').classList.add('hidden');
+    }
+
+    // Confirm booking and persist reservation
+    function confirmBookingPayment() {
+      const dateVal = document.getElementById('booking-date').value;
+
+      if (dateVal && selectedCourt && selectedSlotId) {
+        // Save to persistent storage so it becomes RED (Ocupado)
+        saveReservation(dateVal, selectedCourt, selectedSlotId);
+        
+        closeQRModal();
+        alert('¡Reserva confirmada con éxito! La cancha y horario ahora figuran como Ocupado.');
+        
+        // Refresh schedule to reflect newly occupied slot
+        selectedSlotId = null;
+        renderTimeSlots();
+        updateSummary();
+      }
+    }
+
+    // Send direct WhatsApp message to +591 63019592
+    function sendDirectWhatsApp() {
+      const name = document.getElementById('customer-name').value.trim();
+      const dateVal = document.getElementById('booking-date').value;
+      const slotObj = ALL_TIME_SLOTS.find(s => s.id === selectedSlotId);
+
+      let message = '';
+
+      if (name && slotObj && dateVal) {
+        const parts = dateVal.split('-');
+        const dateFormatted = `${parts[2]}/${parts[1]}/${parts[0]}`;
+        message = `¡Hola Sport Link! Confirmo la reserva de la *${selectedCourt}* para la fecha *${dateFormatted}* en el horario *${slotObj.label}*. Mi nombre es *${name}*. ¿Me envían los datos para completar la reserva?`;
+      } else {
+        message = `¡Hola Sport Link! Quisiera reservar una cancha (de la 1 a la 4). ¿Me ayudan con la información y disponibilidad?`;
+      }
+
+      const whatsappNum = '59163019592';
+      const encodedMsg = encodeURIComponent(message);
+      window.open(`https://wa.me/${whatsappNum}?text=${encodedMsg}`, '_blank');
+    }
+  </script>
+</body>
+</html>
